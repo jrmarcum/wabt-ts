@@ -279,17 +279,6 @@ async function cliRead(tool: string, path: string): Promise<Uint8Array> {
   }
 }
 
-/** Write a file for the CLI, or exit with a one-line message. See {@link cliRead}. */
-async function cliWrite(tool: string, path: string, data: Uint8Array | string): Promise<void> {
-  try {
-    if (typeof data === 'string') await Deno.writeTextFile(path, data);
-    else await Deno.writeFile(path, data);
-  } catch (e) {
-    console.error(`${tool}: cannot write '${path}': ${e instanceof Error ? e.message : String(e)}`);
-    Deno.exit(1);
-  }
-}
-
 if (import.meta.main) {
   const args = Deno.args.slice();
   const inputs: string[] = [];
