@@ -1,5 +1,42 @@
 /**
  * @module
+ * **This project has moved to binaryang (`@jrmarcum/binaryang`).**
+ *
+ * `@jrmarcum/wabt-ts` is superseded by `@jrmarcum/binaryang`, which merges wabt-ts and binaryen-ts
+ * into one package. **1.5.1 is the final release of this package.**
+ *
+ * ## Migrating
+ *
+ * The six tool subpaths keep their names — `./wat2wasm`, `./wasm2wat`, `./wasm-validate`,
+ * `./wasm-objdump`, `./wasm-strip`, `./wasm2ts`. `./compat` becomes `./compat/wabt`.
+ *
+ * Two things MOVE rather than rename, and they are the ones you cannot guess:
+ *
+ * - This package shipped its **IR through the package root**. binaryang's root is deliberately
+ *   narrow — with two IRs retained, a root barrel spanning both would surface 56 colliding type
+ *   names — so the IR is now at `@jrmarcum/binaryang/ir/wabt-ts`.
+ * - The **core vocabulary every tool's return value is expressed in** — `Result`, `ErrorList`,
+ *   `formatErrors` — also reached consumers through the root. It is now at
+ *   `@jrmarcum/binaryang/core/wabt-ts`.
+ *
+ * So anything importing values from `jsr:@jrmarcum/wabt-ts` directly needs a named subpath now.
+ *
+ * ```ts
+ * // was
+ * import { wat2wasm, Result } from 'jsr:@jrmarcum/wabt-ts';
+ * // now
+ * import { wat2wasm } from 'jsr:@jrmarcum/binaryang/wat2wasm';
+ * import { Result } from 'jsr:@jrmarcum/binaryang/core/wabt-ts';
+ * ```
+ *
+ * The CLI is now one entry point: `binaryang wat2wasm`, `binaryang wasm2wat`, … on Deno,
+ * Node 22.18+ and Bun 1.4+.
+ *
+ * **Already using a pinned version? Nothing breaks.** Every published version keeps resolving —
+ * JSR never deletes a version and nothing here is yanked. This package is archived, not withdrawn.
+ *
+ * ---
+ *
  * wabt-ts — Native TypeScript port of WebAssembly/wabt.
  *
  * Provides WebAssembly tooling as idiomatic TypeScript modules with no binary

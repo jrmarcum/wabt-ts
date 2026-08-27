@@ -1,5 +1,37 @@
 # wabt-ts
 
+> ## ⚠️ This project has moved to [binaryang](https://github.com/jrmarcum/binaryang)
+>
+> **`@jrmarcum/wabt-ts` is superseded by [`@jrmarcum/binaryang`](https://jsr.io/@jrmarcum/binaryang)**,
+> which merges `wabt-ts` and `binaryen-ts` into one package. **1.5.1 is the final release here.**
+>
+> ### Migrating
+>
+> The six tool subpaths keep their names — `./wat2wasm`, `./wasm2wat`, `./wasm-validate`,
+> `./wasm-objdump`, `./wasm-strip`, `./wasm2ts`. `./compat` becomes `./compat/wabt`.
+>
+> Two things **move** rather than rename, and they are the ones you cannot guess:
+>
+> | was | now |
+> | --- | --- |
+> | the IR, via the package **root** | `@jrmarcum/binaryang/ir/wabt-ts` |
+> | `Result`, `ErrorList`, `formatErrors`, via the **root** | `@jrmarcum/binaryang/core/wabt-ts` |
+>
+> This package shipped its IR and its core vocabulary through the root. binaryang's root is
+> deliberately narrow — with two IRs retained, a root barrel spanning both would surface 56
+> colliding type names — so each needs an explicitly named subpath. Anything importing values from
+> `jsr:@jrmarcum/wabt-ts` directly needs one now.
+>
+> The CLI is one entry point: `binaryang wat2wasm`, `binaryang wasm2wat`, … on Deno, Node 22.18+
+> and Bun 1.4+.
+>
+> See the [binaryang migration guide](https://github.com/jrmarcum/binaryang#migrating-from-binaryen-ts-or-wabt-ts).
+>
+> ### Already using a pinned version?
+>
+> **Nothing breaks.** Every published version keeps resolving — JSR never deletes a version and
+> nothing here is yanked. This repository and package are archived, not withdrawn.
+
 [![JSR](https://jsr.io/badges/@jrmarcum/wabt-ts)](https://jsr.io/@jrmarcum/wabt-ts)
 [![JSR Score](https://jsr.io/badges/@jrmarcum/wabt-ts/score)](https://jsr.io/@jrmarcum/wabt-ts)
 [![CI](https://github.com/jrmarcum/wabt-ts/actions/workflows/ci.yml/badge.svg)](https://github.com/jrmarcum/wabt-ts/actions/workflows/ci.yml)
